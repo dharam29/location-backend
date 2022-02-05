@@ -28,11 +28,11 @@ app.use((req, res, next) => {
 
 app.use('/', router);
 
-app.use(express.static(join(__dirname, "client")));
+app.use(express.static(join(__dirname,"../", "client")));
 
 // // build mode
 app.get("*", (req, res) => {
-  res.sendFile(join(__dirname, "client/index.html"));
+  res.sendFile(join(__dirname, "../", "client/index.html"));
 });
 
 const httpServer = http.createServer(app);
