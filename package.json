@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "format": "prettier --write \"./src/**/*.{js,jsx,json}\"",
     "clean": "rimraf node_modules package-lock.json",
-    "start": "node index.js",
-    "start:dev": "nodemon --exec babel-node index.js",
-    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node index.js"
+    "start": "node build/index.js",
+    "build": "babel src -d build",
+    "start:dev": "nodemon --exec babel-node src/index.js",
+    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js"
   },
   "author": "",
   "license": "ISC",

@@ -4,9 +4,9 @@ import 'dotenv/config';
 import express from 'express';
 import bodyParser from 'body-parser';
 
-import router from './src/app/routes/index.js';
+import router from './app/routes/index';
 // import { END_PATH } from './src/utils/constant';
-import { Logger } from './src/utils/logger.js';
+import { Logger } from './utils/logger';
 
 const logger = Logger(module.filename);
 const PORT = process.env.PORT || 8090;
