@@ -1,12 +1,11 @@
-import http from 'http';
-import cors from 'cors';
-import express from 'express';
-import 'dotenv/config';
-import bodyParser from 'body-parser';
-
-import router from './src/app/routes';
-import { END_PATH } from './src/utils/constant';
-import { Logger } from './src/utils/logger';
+require('dotenv/config');
+const http = require('http');
+const cors = require('cors');
+const express = require('express');
+const bodyParser = require('body-parser');
+const router = require('./src/app/routes');
+const { END_PATH } = require('./src/utils/constant');
+const { Logger } = require('./src/utils/logger');
 
 const logger = Logger(module.filename);
 const PORT = process.env.PORT || 8090;
