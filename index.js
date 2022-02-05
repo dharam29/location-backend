@@ -5,8 +5,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 
 import router from './src/app/routes/index.js';
-import { END_PATH } from './src/utils/constant';
-import { Logger } from './src/utils/logger';
+// import { END_PATH } from './src/utils/constant';
+import { Logger } from './src/utils/logger.js';
 
 const logger = Logger(module.filename);
 const PORT = process.env.PORT || 8090;
