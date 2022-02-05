@@ -106,7 +106,11 @@ export const locationDetail = async (req, res) => {
 export const locationList = async (req, res) => {
   try {
     const limit = req.query.limit || 5;
-    const offset = req.query.offset || 0;
+    let offset = 0;
+
+    if (req.query.offset && req.query.offset !== 'undefined') {
+      offset = req.query.offset;
+    }
 
     const whereCondition = [];
 
