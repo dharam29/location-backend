@@ -7,6 +7,7 @@ import bodyParser from 'body-parser';
 import router from './app/routes/index';
 // import { END_PATH } from './src/utils/constant';
 import { Logger } from './utils/logger';
+import { join } from 'path';
 
 const logger = Logger(module.filename);
 const PORT = process.env.PORT || 8090;
@@ -26,6 +27,13 @@ app.use((req, res, next) => {
 });
 
 app.use('/', router);
+
+app.use(express.static(join(__dirname, "client")));
+
+// // build mode
+app.get("*", (req, res) => {
+  res.sendFile(join(__dirname, "client/index.html"));
+});
 
 const httpServer = http.createServer(app);
 // logger.info(`Domain Host --> ${process.env.DOMAIN_HOST} ${process.env.PROTOCOL}`);

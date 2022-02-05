@@ -150,9 +150,16 @@ export const removeLocation = async (req, res) => {
     let location = await LocationModel.findByPk(locationId, { raw: true });
 
     if (location != null) {
-      location.destroy({ force: true });
+      const result = await LocationModel.update({isDeleted: true}, {
+        where: {
+          id: locationId,
+        },
+        returning: true
+      });
+
       // commit current DB operation on successful processing & send response to UI app
       await transaction.commit();
+      location['isDeleted'] = true;
       response = { data: location };
     } else {
       // send response to UI app
