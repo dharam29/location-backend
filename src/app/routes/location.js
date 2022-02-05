@@ -1,5 +1,6 @@
 import sequelize from 'sequelize';
 const { Op } = sequelize;
+
 import { Logger } from '../../utils/logger';
 import { LocationModel } from '../../data/models';
 import db from '../../data/sequelize_connection';
@@ -42,8 +43,8 @@ export const updateLocation = async (req, res) => {
     const locationId = req.params.locationId;
     const payload = req.body;
 
-    const locationData = await LocationModel.findByPk(locationId);
-    if (locationData && locationData.dataValues) {
+    const locationData = await LocationModel.findByPk(locationId, { raw: true });
+    if (locationData) {
       const result = await LocationModel.update(payload, {
         where: {
           id: locationId,
@@ -103,13 +104,9 @@ export const locationDetail = async (req, res) => {
 
 export const locationList = async (req, res) => {
   try {
-    // const perPage = req.query.perPage;
-    // const offset = req.query.page;
-  
-    // const query = {};
-  
-    // query.limit = perPage ? perPage : 10;
-    // query.offset = offset ? offset : 0;
+    const limit = req.query.limit || 10;
+    const offset = req.query.offset || 0;
+
     const whereCondition = [];
 
     // search location by location name
@@ -123,7 +120,10 @@ export const locationList = async (req, res) => {
       where: {
         [Op.and]: whereCondition
       },
-      raw: true
+      limit,
+      offset,
+      raw: true,
+      logging: false
     });
 
     // send result to UI app
@@ -147,7 +147,7 @@ export const removeLocation = async (req, res) => {
     const locationId = req.params.locationId;
     let response;
 
-    let location = await LocationModel.findByPk(locationId);
+    let location = await LocationModel.findByPk(locationId, { raw: true });
 
     if (location != null) {
       location.destroy({ force: true });
