@@ -104,7 +104,7 @@ export const locationDetail = async (req, res) => {
 
 export const locationList = async (req, res) => {
   try {
-    const limit = req.query.limit || 10;
+    const limit = req.query.limit || 5;
     const offset = req.query.offset || 0;
 
     const whereCondition = [];
