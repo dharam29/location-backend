@@ -6,7 +6,8 @@
   "scripts": {
     "format": "prettier --write \"./src/**/*.{js,jsx,json}\"",
     "clean": "rimraf node_modules package-lock.json",
-    "start": "nodemon --exec babel-node index.js",
+    "start": "node --exec babel-node index.js",
+    "start:dev": "nodemon --exec babel-node index.js",
     "dev": "cross-env NODE_ENV=development nodemon --exec babel-node index.js"
   },
   "author": "",
