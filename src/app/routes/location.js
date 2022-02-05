@@ -70,7 +70,6 @@ export const updateLocation = async (req, res) => {
       })
     }
   } catch (error) {
-    console.error(error)
     logger.error(error)
     // roll back current DB operation if any error occurs & send response to UI app
     await transaction.rollback();
