@@ -116,7 +116,7 @@ export const locationList = async (req, res) => {
       whereCondition.push({ [searchKey]: { [Op.iLike]: `%${searchValue}%` } });
     }
 
-    const locationData = await LocationModel.findAll({
+    const locationData = await LocationModel.findAndCountAll({
       where: {
         [Op.and]: whereCondition
       },
@@ -128,7 +128,8 @@ export const locationList = async (req, res) => {
 
     // send result to UI app
     return res.status(200).send({
-      data: locationData
+      count: locationData.count,
+      data: locationData.rows
     })
 
   } catch (error) {
