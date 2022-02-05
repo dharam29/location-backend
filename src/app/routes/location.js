@@ -99,15 +99,15 @@ export const locationDetail = async (req, res) => {
 
 export const locationList = async (req, res) => {
   const perPage = req.query.perPage;
-  const page = req.query.page;
+  const offset = req.query.page;
 
   const query = {};
 
-  query.limit = perPage;
-	query.offset = page;
+  query.limit = perPage ? perPage : 10;
+	query.offset = offset ? offset : 0;
   try {
     // logger.info('locationList is here----',process.env.POSTGRES_HOST);
-    const locationData = await LocationModel.findAll({
+    const locationData = await LocationModel.findAll(query, {
       raw: true
     });
 
