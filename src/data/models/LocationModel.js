@@ -43,9 +43,8 @@ const LocationModel = db.define(
       field: 'loc_ref_id_type',
     },
     coordLonLat: {
-      // type: Sequelize.TEXT,
-      type: DataTypes.GEOMETRY('POINT'),
-      field: 'coord_lon_lat',  //point      
+      type: Sequelize.TEXT,
+      field: 'coord_lon_lat',
     },
     addrState: {
       type: Sequelize.TEXT,

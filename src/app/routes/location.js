@@ -25,8 +25,9 @@ export const addLocation = async (req, res) => {
 
     // commit current DB operation on successful processing & send response to UI app
     await transaction.commit();
-    return res.status(200).send(result);
-
+    return res.status(200).send({
+      result: "Location Added Successfully"
+    });
   } catch (error) {
     logger.error(error)
     await transaction.rollback();
@@ -69,6 +70,7 @@ export const updateLocation = async (req, res) => {
       })
     }
   } catch (error) {
+    console.error(error)
     logger.error(error)
     // roll back current DB operation if any error occurs & send response to UI app
     await transaction.rollback();
