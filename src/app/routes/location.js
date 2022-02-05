@@ -42,7 +42,8 @@ export const updateLocation = async (req, res) => {
   let transaction = await db.transaction();
   try {
     const locationId = req.params.locationId;
-    const payload = req.body;
+    let payload = req.body;
+    payload.updatedOn = new Date().toISOString();
 
     const locationData = await LocationModel.findByPk(locationId, { raw: true });
     if (locationData) {
@@ -138,7 +139,7 @@ export const locationList = async (req, res) => {
     })
 
   } catch (error) {
-    logger.error(error)
+    logger.error(JSON.stringify(error))
     // send error response if any error occurs
     return res.status(500).send({
       result: "Server Error"
