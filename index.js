@@ -4,7 +4,7 @@ import 'dotenv/config';
 import express from 'express';
 import bodyParser from 'body-parser';
 
-import router from './src/app/routes';
+import router from './src/app/routes/index';
 import { END_PATH } from './src/utils/constant';
 import { Logger } from './src/utils/logger';
 
