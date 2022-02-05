@@ -1,4 +1,4 @@
-import Sequelize from 'sequelize';
+import {Sequelize, DataTypes} from 'sequelize';
 import db from '../sequelize_connection';
 
 const LocationModel = db.define(
@@ -43,8 +43,9 @@ const LocationModel = db.define(
       field: 'loc_ref_id_type',
     },
     coordLonLat: {
-      type: Sequelize.TEXT,
-      field: 'coord_lon_lat',  //point
+      // type: Sequelize.TEXT,
+      type: DataTypes.GEOMETRY('POINT'),
+      field: 'coord_lon_lat',  //point      
     },
     addrState: {
       type: Sequelize.TEXT,
@@ -70,10 +71,12 @@ const LocationModel = db.define(
     isActive: {
       type: Sequelize.BOOLEAN,
       field: 'is_active',
+      defaultValue: true
     },
     isDeleted: {
       type: Sequelize.BOOLEAN,
       field: 'is_deleted',
+      defaultValue: false
     },
     createdBy: {
       type: Sequelize.TEXT,
